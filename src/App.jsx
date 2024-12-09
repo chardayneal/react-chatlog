@@ -1,9 +1,11 @@
-import './App.css';
 import messages from './data/messages.json';
-import ChatEntry from '../src/components/ChatEntry';
 import ChatLog from './components/ChatLog';
+import './App.css';
 
 const App = () => {
+  const buttonClickHandler = (event) => {
+    // toggle the event target value from an empty heart to a filled heart
+  };
 
   return (
     <div id="App">
@@ -11,9 +13,7 @@ const App = () => {
         <h1>Application title</h1>
       </header>
       <main>
-        <ChatLog entries={messages} />
-        {/* Wave 01: Render one ChatEntry component
-        Wave 02: Render ChatLog component */}
+        <ChatLog entries={messages} buttonClickHandler={buttonClickHandler}/>
       </main>
     </div>
   );
