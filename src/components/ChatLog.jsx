@@ -3,16 +3,18 @@ import PropTypes from 'prop-types';
 import './ChatLog.css';
 
 const ChatLog = ({ entries, buttonClickHandler }) => {
-  let chatEntries = [];
-  for (let i = 1; i <= entries.length; i++) {
-    const entry = entries.find(element => element.id === i);
-    const { sender, body, timeStamp } = entry;
+  const sortedEntries = entries.sort((a,b)=> a.id < b.id);
 
-    // eslint-disable-next-line max-len
-    const chatEntry = <ChatEntry sender={sender} body={body} timeStamp={timeStamp} buttonClickHandler={buttonClickHandler}/>;
-
-    chatEntries.push(chatEntry);
-  }
+  // placed outside of return for readability
+  const chatEntries = sortedEntries.map((entry) => {
+    return <ChatEntry
+      key={entry.id}
+      sender={entry.sender}
+      body={entry.body}
+      timeStamp={entry.timeStamp}
+      buttonClickHandler={buttonClickHandler}
+    />;
+  });
 
   return (
     <section className="chat-log">
