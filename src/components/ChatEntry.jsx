@@ -1,8 +1,8 @@
 import TimeStamp from './TimeStamp';
+import PropTypes from 'prop-types';
 import './ChatEntry.css';
 
 const ChatEntry = ({sender, body, timeStamp, buttonClickHandler}) => {
-
   return (
     <div className="chat-entry local">
       <h2 className="entry-name">{sender}</h2>
@@ -16,7 +16,10 @@ const ChatEntry = ({sender, body, timeStamp, buttonClickHandler}) => {
 };
 
 ChatEntry.propTypes = {
-  // Fill with correct proptypes
+  sender: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  timeStamp: PropTypes.string.isRequired,
+  buttonClickHandler: PropTypes.func.isRequired
 };
 
 export default ChatEntry;

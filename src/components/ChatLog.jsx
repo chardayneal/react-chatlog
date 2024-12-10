@@ -1,22 +1,29 @@
-import ChatEntry from "./ChatEntry";
+import ChatEntry from './ChatEntry';
+import PropTypes from 'prop-types';
 import './ChatLog.css';
 
 const ChatLog = ({ entries, buttonClickHandler }) => {
-    
-    let chat_entries = [];
-    for (let i = 1; i <= entries.length; i++) {
-        const entry = entries.find(element => element.id === i);
+  let chatEntries = [];
+  for (let i = 1; i <= entries.length; i++) {
+    const entry = entries.find(element => element.id === i);
+    const { sender, body, timeStamp } = entry;
 
-        const chat_entry = <ChatEntry sender={entry.sender} body={entry.body} timeStamp={entry.timeStamp} buttonClickHandler={buttonClickHandler} />;
+    // eslint-disable-next-line max-len
+    const chatEntry = <ChatEntry sender={sender} body={body} timeStamp={timeStamp} buttonClickHandler={buttonClickHandler}/>;
 
-        chat_entries.push(chat_entry);
-    }
+    chatEntries.push(chatEntry);
+  }
 
-    return (
-        <section className="chat-log">
-            {chat_entries}
-        </section>
-    );
+  return (
+    <section className="chat-log">
+      {chatEntries}
+    </section>
+  );
+};
+
+ChatLog.propTypes = {
+  entries: PropTypes.array.isRequired,
+  buttonClickHandler: PropTypes.func.isRequired
 };
 
 export default ChatLog;
