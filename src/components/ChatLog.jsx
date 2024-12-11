@@ -2,17 +2,14 @@ import ChatEntry from './ChatEntry';
 import PropTypes from 'prop-types';
 import './ChatLog.css';
 
-const ChatLog = ({ entries, buttonClickHandler }) => {
-  const sortedEntries = entries.sort((a,b)=> a.id < b.id);
-
+const ChatLog = ({ entries }) => {
   // placed outside of return for readability
-  const chatEntries = sortedEntries.map((entry) => {
+  const chatEntries = entries.map((entry) => {
     return <ChatEntry
       key={entry.id}
       sender={entry.sender}
       body={entry.body}
       timeStamp={entry.timeStamp}
-      buttonClickHandler={buttonClickHandler}
     />;
   });
 
@@ -24,8 +21,7 @@ const ChatLog = ({ entries, buttonClickHandler }) => {
 };
 
 ChatLog.propTypes = {
-  entries: PropTypes.array.isRequired,
-  buttonClickHandler: PropTypes.func.isRequired
+  entries: PropTypes.array.isRequired
 };
 
 export default ChatLog;
