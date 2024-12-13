@@ -6,9 +6,9 @@ import './App.css';
 const App = () => {
   const [chatEntries, setChatEntries] = useState(messages);
 
-  const updateChatEntryLike = (id) => {
+  const updateChatEntryLike = (chatId) => {
     setChatEntries(chatEntries => chatEntries.map(entry => {
-      if (entry.id === id) {
+      if (entry.id === chatId) {
         return {...entry, liked: !entry.liked};
       } else {
         return entry;
@@ -16,19 +16,14 @@ const App = () => {
     }));
   };
 
-  const getNumOfHearts = () => {
-    const likedMessages = chatEntries.filter(entry => entry.liked);
-    return likedMessages.length;
-  };
-
-  const numOfHearts = getNumOfHearts();
+  const numOfHearts = chatEntries.filter(entry => entry.liked).length;
 
   return (
     <div id="App">
       <header>
         <h1>Chat with Vladamir and Estragon</h1>
         <section>
-          <span className='widget'>{numOfHearts} ❤️s </span>
+          <h2 className='widget'>{numOfHearts} ❤️s </h2>
         </section>
       </header>
       <main>

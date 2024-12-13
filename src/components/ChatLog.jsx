@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import './ChatLog.css';
 
 const ChatLog = ({ entries, onLikedToggle }) => {
-  // placed outside of return for readability
   const chatEntries = entries.map((entry) => {
     return (
       <li key={entry.id}>
