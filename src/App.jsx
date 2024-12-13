@@ -3,8 +3,20 @@ import messages from './data/messages.json';
 import ChatLog from './components/ChatLog';
 import './App.css';
 
+const getSenderNames = () => {
+  const senderNames = new Set();
+  for (const message of messages) {
+    senderNames.add(message.sender);
+  }
+  return Array.from(senderNames);
+};
+
 const App = () => {
   const [chatEntries, setChatEntries] = useState(messages);
+
+  const texters = getSenderNames();
+
+  const numOfHearts = chatEntries.filter(entry => entry.liked).length;
 
   const updateChatEntryLike = (chatId) => {
     setChatEntries(chatEntries => chatEntries.map(entry => {
@@ -15,8 +27,6 @@ const App = () => {
       }
     }));
   };
-
-  const numOfHearts = chatEntries.filter(entry => entry.liked).length;
 
   return (
     <div id="App">
@@ -29,6 +39,7 @@ const App = () => {
       <main>
         <ChatLog
           entries={chatEntries}
+          texters={texters}
           onLikedToggle={updateChatEntryLike}
         />
       </main>
