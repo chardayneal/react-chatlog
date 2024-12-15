@@ -1,34 +1,38 @@
-import ChatEntry from './ChatEntry';
 import PropTypes from 'prop-types';
+import ChatEntry from './ChatEntry';
 import './ChatLog.css';
 
 const ChatLog = ({ entries, onLikedToggle }) => {
   const chatEntries = entries.map((entry) => {
     return (
-      <li key={entry.id}>
-        <ChatEntry
-          id={entry.id}
-          sender={entry.sender}
-          body={entry.body}
-          liked={entry.liked}
-          timeStamp={entry.timeStamp}
-          handleLikeToggle={onLikedToggle}
-        />
-      </li>
+      <ChatEntry
+        key={entry.id}
+        id={entry.id}
+        sender={entry.sender}
+        body={entry.body}
+        liked={entry.liked}
+        timeStamp={entry.timeStamp}
+        handleLikeToggle={onLikedToggle}
+      />
     );
   });
 
   return (
     <section className="chat-log">
-      <ul>
-        {chatEntries}
-      </ul>
+      {chatEntries}
     </section>
   );
 };
 
 ChatLog.propTypes = {
-  entries: PropTypes.array.isRequired,
+  entries: PropTypes.arrayOf({
+    id: PropTypes.number.isRequired,
+    sender: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    timeStamp: PropTypes.string.isRequired,
+    liked: PropTypes.bool.isRequired,
+    handleLikeToggle: PropTypes.func.isRequired
+  }).isRequired,
   onLikedToggle: PropTypes.func.isRequired,
 };
 

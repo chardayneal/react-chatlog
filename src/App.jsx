@@ -7,15 +7,11 @@ import './App.css';
 const App = () => {
   const [chatEntries, setChatEntries] = useState(messages);
 
-  const numOfHearts = chatEntries.filter(entry => entry.liked).length;
+  const numOfLikes = chatEntries.filter(entry => entry.liked).length;
 
-  const updateChatEntryLike = (chatId) => {
+  const updateChatEntryLike = (entryId) => {
     setChatEntries(chatEntries => chatEntries.map(entry => {
-      if (entry.id === chatId) {
-        return {...entry, liked: !entry.liked};
-      } else {
-        return entry;
-      }
+      return entry.id === entryId ? {...entry, liked: !entry.liked} : entry;
     }));
   };
 
@@ -24,7 +20,10 @@ const App = () => {
       <header>
         <h1>Chat with Vladamir and Estragon</h1>
         <section>
-          <h2 className='widget'>{numOfHearts} ❤️s </h2>
+          <h2
+            className='widget'
+            id='heartWidget'
+          >{numOfLikes} ❤️s </h2>
         </section>
       </header>
       <main>

@@ -1,16 +1,21 @@
-import TimeStamp from './TimeStamp';
 import PropTypes from 'prop-types';
+import TimeStamp from './TimeStamp';
 import './ChatEntry.css';
 
 const ChatEntry = ({id, sender, body, timeStamp, liked, handleLikeToggle}) => {
+  const localRemote = sender === 'Vladimir' ? 'local': 'remote';
+
   return (
-    <div className={`chat-entry ${sender === 'Vladimir' ? 'local': 'remote'}`}>
+    <div className={`chat-entry ${localRemote}`}>
       <h2 className="entry-name">{sender}</h2>
+
       <section className="entry-bubble">
         <p>{body}</p>
-        <p className="entry-time">
-          <TimeStamp time={timeStamp}/>
-        </p>
+        <div className='entry-time'>
+          <TimeStamp
+            time={timeStamp}
+          />
+        </div>
         <button
           className="like"
           onClick={() => handleLikeToggle(id)}
